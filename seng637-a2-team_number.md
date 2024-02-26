@@ -10,20 +10,54 @@
 |  Olayinka Afolabi |
 | Emmanuel Alafonye |
 
+**Table of Content**
+
+[1 Introduction](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#1-introduction)
+
+[2 Detailed description of unit test strategy](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#2-detailed-description-of-unit-test-strategy)
+
+[3 Test cases developed](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#3-test-cases-developed)
+
+[4 How the teamwork/effort was divided and managed](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#4-how-the-teamworkeffort-was-divided-and-managed)
+
+[5 Difficulties encountered, challenges overcome, and lessons learned](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#5-difficulties-encountered-challenges-overcome-and-lessons-learned)
+
+[6 Comments/feedback on the lab itself](https://github.com/seng637-Winter/seng637-a2-AllisonOge/blob/main/seng637-a2-team_number.md#6-commentsfeedback-on-the-lab-itself)
+
 # 1 Introduction
 
-In software development, a solid grasp of automated unit testing principles is indispensable. This assignment serves as an introductory voyage into the realm of automated unit testing, specifically tailored for students. Our focus lies on crafting tests that align precisely with unit requirements, with JUnit leading the charge as a cornerstone tool in the XUnit framework family, renowned for its prowess in Java-based unit testing.
+This lab report discusses the strategy applied to perform automated unit testing using the black box techniques. The lab is carried out on a version of JFreeChart, an open-source Java framework for chart calculation, creation and display. The unit testing strategy applied explores the JUnit and Javadoc tools to implement test cases for a total of ten methods from the classes `org.jfree.data.Range` and `org.jfree.data.DataUtilities`. We implement the test cases using the JUnit 4 library for compatibility reasons.
 
-We started the assignment with a phase of familiarization, where we acquainted ourselves with the assignment's objectives and the software at hand. Subsequently, we shift our attention towards the meticulous creation of unit tests, crafted in strict accordance with the requirements outlined in Javadocs. As we progress, the final phase involves executing these test suites across various iterations of the system under scrutiny, culminating in a comprehensive collection of test results.
+We started the assignment with a phase of familiarization, where we acquainted ourselves with the assignment's objectives and the software at hand. Subsequently, we shift our attention towards the meticulous creation of unit test strategies that apply the black box techniques according to the requirements outlined in Javadocs for the classes in concern. The phase was collaboratively carried out by all members of the team through task assignments and check-in meetings to track progress and collectively bring all members up to speed. The final stage comprised the compilation and revision of all individual works of the team members for a comprehensive test suite for the system under test.
 
-At the heart of these tasks lie two indispensable testing tools: JUnit and Javadoc.
-The system under scrutiny in this educational endeavour is JFreeChart, a revered open-source Java framework known for its proficiency in chart computation, construction, and visualization. Offering versatility, JFreeChart caters to an extensive array of chart types, making it a staple in Java applications seeking robust charting functionalities.
-As we delve into the intricacies of JFreeChart, it becomes apparent that its framework architecture is housed within the `org.jfree.data` package, which beckons exploration. Although mastery of the JFreeChart API isn't mandatory, we navigate through its functionalities, fueled by the assurance of its user-friendly design.
-Ultimately, this assignment embarks on a journey of discovery, equipping us with the tools and insights necessary for proficient automated unit testing within the captivating domain of Java development.
+The following sections dive into a detailed description of the strategy applied (black box techniques), the test cases that were developed as seen in the source code while correlating them to the test strategies outlined, the teamwork effort, challenges encountered and lessons learned, and lastly final comments on the completed lab.
 
 # 2 Detailed description of unit test strategy
 
-The unit test strategy employed for this lab was the black box testing technique. The tests cover equivalence partitioning, boundary value analysis, and decision table strategies to validate the correctness and robustness of the methods of the classes under test (`org.jfree.data.DataUtilites` and `org.jfree.data.Range`).
+The unit test strategy employed for this lab was the black box testing technique. The tests cover equivalence partitioning, boundary value analysis, decision table strategies, and error guessing to validate the correctness and robustness of the methods of the classes under test (`org.jfree.data.DataUtilites` and `org.jfree.data.Range`).
+## Objectives
+- To verify that the methods of the `org.jfree.data.Range` class accurately satisfy the requirements of the documentation.
+- To verify that the methods of the `org.jfree.data.DataUtilities` class accurately satisfy the requirements of the documentation.
+
+## Test Strategies
+The following test strategies will be employed in this lab.
+
+### Equivalence Partitioning (EP)
+This technique will divide the inputs to the methods into groups that are expected to elicit similar responses from the methods. For example, valid data inputs for accomplishing the methods function (computing the sum of 2D data given an index) and invalid inputs (such as null inputs) for triggering exceptions.
+
+### Boundary Value Analysis (BVA)
+This technique will pay special attention to testing the boundaries of the data input range, such as empty datasets, and maximum allowable indexes just outside the valid range.
+
+### Decision Table Strategies
+This technique will be used to systematically explore combinations of inputs, for example, indexes and data conditions (valid and invalid), to ensure all logical paths are verified.
+
+### Error Guessing (EG)
+This technique will be employed to identify potential error conditions not covered by the above methods. Based on testers' experience and knowledge of common pitfalls in data manipulation and calculation function, the test will be designed to target overflow conditions, precision issues, handling special numerical values such as NaN and concurrent modifications of the input data which might lead to inconsistent results.
+
+## Codebase Structure and Test Data
+These techniques will be applied to the classes under test using the requirements found in the Javadoc to develop test cases for the individual methods. For ease of teamwork and modularity, we chose to design test cases for each method in a class, for example given the method `Range.getCentralValue`, the test cases developed will be implemented in a class called `GetCentralValueTest` contained in the `GetCentralValueTest.java` file. These files were then organized into the `org.jfree.data.test` package. The test cases developed for each of the ten methods tested are discussed in the next section.
+
+With some of the methods, there will be the need for test data which we will accomplish in one of two ways. Either with mock data using the JMock library or explicitly defining the data.
 
 # 3 Test cases developed
 
@@ -78,7 +112,7 @@ The GetLengthTest class contains JUnit tests for the getLength method in the `or
 - `testGetLengthZeroLength`: This test checks whether the method returns a length of 0.0 for a range with both bounds set to zero.
 
 ### Equivalence Partitioning
-The input space for the getLength method can be divided into ranges with positive, negative, and zero lengths. Each test case covers one partition to ensure comprehensive testing.
+The input space for the getLength method is divided into ranges with positive, negative, and zero lengths. Each test case covers one partition to ensure comprehensive testing.
 
 ### Boundary Value Analysis
 Test cases consider the boundaries of the input range. For example, `testGetLengthZeroLength` specifically targets the boundary where both lower and upper bounds are zero.
@@ -95,20 +129,27 @@ Table 3: Summary of test cases for `org.jfree.data.Range.getLength` method
 
 ## D `org.jfree.data.test.ExpandTest`
 According to the docs accompanying the `expand` method, there are some important considerations which include the following;
-- The `range` parameter must not be null
-- 
+- the lower and upper margins expect values from 0 to 1 where the minimum value is 0 (0%) and the maximum value is 1 (100%)
+- Valid input range for the range objects can either be positive ranges, negative ranges, or mixed ranges while valid input margins will be values between 0 and 1.
+- Invalid margins can either be negative margins or margins greater than 1.
 - The method throws InvalidParameterException for invalid `range` data objects
 
-As such there are four methods (test cases) which are testExpandWithValidInput, `testExpandWithNullRange`, `testExpandWithNegativeMargin` and `testExpandWithZeroMargins` and their respective functions are as follows;
-- `testExpandWithValidInput` - to check for the correct output range object with valid inputs
+Applying the boundary value analysis we can consider valid margins with valid ranges (positive, negative or mixed ranges) as well as when there is an empty range (the start and the end index of the range object are the same). Then for equivalence partitioning testing, we test invalid input margins with any range. All of the above cases can essentially be captured as part of the decision table with the addition of the null range input to raise the InvalidParameterException. As such there are four methods (test cases) which are testExpandWithValidInput, `testExpandWithEmptyRange`, `testExpandWithInvalidMargins` and `testExpandWithNullRange` and their respective functions are as follows;
+- `testExpandWithValidInput` - to check for the correct expansion with valid inputs.
+- `testExpandWithEmptyRange` - to check for the correct expansion with empty range.
+- `testExpandWithInvalidMargins` - to check for the output range object with negative margins.
 - `testExpandWithNullRange` - to check that the method throws an “InvalidParameterException” for null “range”.
-- `testExpandWithNegativeMargin` - to check for the output range object with negative margins.
-- `testExpandWithZeroMargins` - to check for the output range object with zero margins.
 
 Table 4: Decision table for `org.jfree.data.Range.expand` method
+| Valid Range | Lower Margin | Upper Margin | Expected Outcome |
+| --- | --- | --- | --- |
+| Yes | Within 0 - 1 | Within 0 - 1 | Valid expansion |
+| Yes (empty range) | Within 0 - 1 | Within 0 - 1 | Valid expansion |
+| Yes | Beyond 0 - 1| Beyond 0 - 1 | InvalidParameterException |
+| No | Any | Any | InvalidParameterException |
 
 ## E `org.jfree.data.test.ShiftTest`
-The `Range.shift` method plays a pivotal role in adjusting data ranges by a specified delta while considering the allowance or prevention of zero crossings. Given the method's functionalities, our testing strategy is meticulously designed to encompass a wide range of scenarios using black-box testing techniques such as Equivalence Partitioning (EP), Boundary Value Analysis (BVA), and Error Guessing (EG). Below, we detail our test cases and the logic behind each, ensuring a robust evaluation of the method's behaviour.
+The `org.jfree.data.test.ShiftTest` class contains the test cases that test the `Range.shift` method. This method's primary function is to return the shifted version (to the right) of a Range object. It applies black box techniques in the following fashion to the test cases. 
 
 ### Test Cases
 - `testPositiveRangeWithPositiveDelta` (Equivalence Partitioning)
@@ -201,7 +242,7 @@ Table 7: Summary of test cases for `org.jfree.data.DataUtilities.createNumberArr
 | `testCreateNumberArray2DInvalidInput` | No | IllegalArgumentException is thrown |
 
 ## D `org.jfree.data.test.GetCumulativePercentagesTest`
-The `DataUtilitiesGetCumulativePercentagesTest` class is designed to rigorously evaluate the `getCumulativePercentages` method from the DataUtilities class within the JFreeChart library. This method's primary function is to calculate the cumulative percentages of numerical data represented by KeyedValues. Our testing strategy encompasses various scenarios to ensure comprehensive validation of the method's correctness, reliability, and robustness.
+The `DataUtilitiesGetCumulativePercentagesTest` class is designed to rigorously evaluate the `getCumulativePercentages` method from the DataUtilities class. This method's primary function is to calculate the cumulative percentages of numerical data represented by KeyedValues. Our testing strategy encompasses various scenarios to ensure comprehensive validation of the method's correctness, reliability, and robustness.
 
 ### Test cases
 - `testCumulativePercentagesEmptyDataset` (Boundary Value Analysis)
@@ -249,7 +290,16 @@ Table 8: Decision table for the org.jfree.data.test.CreateNumberArrayTest
 
 # 4 How the teamwork/effort was divided and managed
 
-Text…
+Teamwork was an important part of the lab and as such it was crucial to how the lab will be completed. Every member of the team contributed to the test suite development and creation of the lab report through the design, code development and documentation of the test cases for the chosen two methods (one from the `org.jfree.data.Range` class and another from the `org.jfree.data.DataUtilities` class). The work was mostly done independently, only collaborating to either debug a member's codebase or check in on the project's progress. The test cases were developed individually and then compiled by one of the members for consistency and correctness for the final version that was submitted. The task assignments for the members of the team are shown in Table 9.
+
+Table 9: task assignments for each of the team members
+| Team Member | Methods Under Test | Additional Duties |
+| --- | --- | --- |
+| Sami Abdelhalem | `org.jfree.data.test.ShiftTest` <br/> `org.jfree.data.test.GetCumulativePercentagesTest` | 
+| Mohammad Hallaq | `org.jfree.data.test.GetUpperBoundTest` <br/> `org.jfree.data.test.CreateNumberArrayTest` | |
+| Ogechukwu Kanu | `org.jfree.data.test.ExpandTest` <br/> `org.jfree.data.test.calculateColumnTotalTest` | Compilation of final code and finalizing lab report |
+| Olayinka Afolabi | `org.jfree.data.test.GetLowerBoundTest` <br/> `org.jfree.data.DataUtilities.calculateRowTotalTest` | Completion of other sections of the lab report |
+| Emmanuel Alafonye | `org.jfree.data.test.GetLengthTest` <br/> `org.jfree.data.test.CreateNumberArray2DTest` | |
 
 # 5 Difficulties encountered, challenges overcome, and lessons learned
 These tasks focused on automated unit testing, particularly when using tools like JUnit and testing frameworks such as Javadoc, presented various challenges. Some of the difficulties we encountered are as follows.
@@ -257,10 +307,9 @@ These tasks focused on automated unit testing, particularly when using tools lik
 2. **Tool Familiarity**: Learning to navigate and utilize testing tools like JUnit and Javadoc effectively requires time and practice. We struggled with understanding the functionalities and features offered by these tools.
 3. **Interpreting Requirements**: Crafting unit tests that accurately reflect the requirements outlined in Javadocs demands a clear understanding of the specifications. Misinterpretation or ambiguity in requirements can lead to incorrect or incomplete test cases.
 4. **Test Case Design**: Designing comprehensive test cases that cover various scenarios and edge cases can be complex. We found it challenging to identify all possible inputs, states, and behaviours to be tested.
-5. **Integration Issues**: Integrating unit tests with the system under test (in this case, JFreeChart), we encountered obstacles such as setting up dependencies, configuring environments, or dealing with compatibility issues.
-6. **Mock Objects**: Working with mock objects, essential for isolating components during testing, was tricky. Understanding when and how to use mock objects effectively requires careful consideration and practice.
-7. **Debugging**: Troubleshooting failing test cases and debugging issues within test code can be time-consuming. We struggled with identifying the root cause of failures and rectifying them.
+
+Most of the difficulties were overcome through team collaboration and sharing of ideas and solutions. Particularly, interpreting the requirements of the methods in order to design the test case was mostly challenging and it can be said that such a craft is an art and improves with experience. Through online resources and research, we devised better test case designs given the requirements. 
 
 # 6 Comments/feedback on the lab itself
 
-Text…
+The lab helped to build teamwork, collaboration and sharing. We understood our individual strengths and weaknesses which enabled us to plan accordingly. We understood the basics of unit testing and black box testing techniques. In conclusion, the lab was a success and we completed it successfully.
